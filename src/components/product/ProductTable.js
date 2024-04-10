@@ -94,18 +94,18 @@ const ProductTable = ({ products, isCheck, setIsCheck, currency, lang }) => {
                 )}
                 <div>
                   <h2 className="text-sm font-medium">
-                    {/* {showingTranslateValue(product?.title, lang)?.substring(
+                    {showingTranslateValue(product?.title[lang], lang)?.substring(
                       0,
                       28
-                    )} */}
-                    {/* {product.title.substring(
+                    )}
+                    {product.title[lang].substring(
                       0,
                       15
-                    )}... */}
+                    )}...
                   </h2>
                   <h2 className="text-sm font-medium">
-                    {product.title && typeof product.title === 'string' ?
-                      product.title.substring(0, 15) + '...' :
+                    {product.title[lang] && typeof product.title[lang] === 'string' ?
+                      product.title[lang].substring(0, 15) + '...' :
                       ''
                     }
                   </h2>
@@ -116,8 +116,8 @@ const ProductTable = ({ products, isCheck, setIsCheck, currency, lang }) => {
 
             <TableCell>
               <span className="text-sm">
-                {/* {showingTranslateValue(product?.parent, lang)} */}
-                {product?.parent}
+                {showingTranslateValue(product?.parent, lang)}
+                {/* {product?.parent} */}
               </span>
             </TableCell>
 
@@ -131,7 +131,7 @@ const ProductTable = ({ products, isCheck, setIsCheck, currency, lang }) => {
             <TableCell>
               <span className="text-sm font-semibold">
                 {currency}
-                {Number(product?.price).toFixed(2)}
+                {Number(product?.price[lang]).toFixed(2)}
               </span>
             </TableCell>
 
@@ -169,7 +169,7 @@ const ProductTable = ({ products, isCheck, setIsCheck, currency, lang }) => {
                 isCheck={isCheck}
                 handleUpdate={handleUpdate}
                 handleModalOpen={handleModalOpen}
-                title={showingTranslateValue(product?.title, lang)}
+                title={showingTranslateValue(product?.title[lang], lang)}
               />
             </TableCell>
           </TableRow>

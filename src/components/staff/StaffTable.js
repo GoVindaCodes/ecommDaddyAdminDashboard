@@ -1,5 +1,5 @@
 import { Avatar, TableBody, TableCell, TableRow } from "@windmill/react-ui";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useToggleDrawer from "hooks/useToggleDrawer";
 // import StaffDrawer from "components/drawer/StaffDrawer";
 // import DeleteModal from "components/modal/DeleteModal";
@@ -10,8 +10,13 @@ import MainDrawer from "components/drawer/MainDrawer";
 import { showingTranslateValue } from "utils/translate";
 import StaffDrawer from "components/drawer/StaffDrawer";
 import DeleteModal from "components/modal/DeleteModal";
-// import useFilter from "hooks/useFilter";
-// import { showDateFormat } from "utils/dateFormate";
+import requests from "services/httpService";
+import CouponServices from "services/CouponServices";
+import useAsync from "hooks/useAsync";
+import useFilter from "hooks/useFilter";
+import { showDateFormat } from "utils/dateFormate";
+import dayjs from "dayjs";
+import AdminServices from "services/AdminServices";
 
 const StaffTable = ({ staffs, lang }) => {
   const {
@@ -24,9 +29,25 @@ const StaffTable = ({ staffs, lang }) => {
     serviceId,
     title,
   } = useToggleDrawer();
+  const { data, loading } = useAsync(AdminServices.getAllStaff);
 
-  // const { globalSetting } = useFilter();
-  console.log("id: in stafftable ", serviceId)
+  const [coupons, setCoupons] = useState([]);
+  // console.log("allID : ", allId)
+  useEffect(() => {
+    const fetchLanguages = async () => {
+      try {
+        console.log("Fetching Coupons...");
+        const response = await requests.get('/api/admin');
+        console.log("Coupons fetched successfully:", response);
+        setCoupons(response);
+      } catch (error) {
+        console.error('Error fetching languages:', error);
+      }
+    };
+    fetchLanguages();
+  }, []);
+  const { globalSetting } = useFilter();
+  console.log("id: in stafftable ", data)
   return (
     <>
       <DeleteModal id={serviceId} title={title} />
@@ -36,7 +57,7 @@ const StaffTable = ({ staffs, lang }) => {
       </MainDrawer>
 
       <TableBody>
-        {staffs?.map((staff) => (
+        {data?.map((staff) => (
           <TableRow key={staff._id}>
             <TableCell>
               <div className="flex items-center">
@@ -47,7 +68,7 @@ const StaffTable = ({ staffs, lang }) => {
                 />
                 <div>
                   <h2 className="text-sm font-medium">
-                    {showingTranslateValue(staff?.name, lang)}
+                    {showingTranslateValue(staff?.name[lang], lang)}
                   </h2>
                 </div>
               </div>
@@ -62,12 +83,12 @@ const StaffTable = ({ staffs, lang }) => {
 
             <TableCell>
               <span className="text-sm">
-                {/* {dayjs(staff.joiningData).format("DD/MM/YYYY")} */}
-                {/* {showDateFormat(
+                {dayjs(staff.joiningData).format("DD/MM/YYYY")}
+                {showDateFormat(
                   staff.joiningData,
                   globalSetting.default_date_format
-                )} */}
-                {staff.joiningData}
+                )}
+                {/* {staff.joiningData} */}
               </span>
             </TableCell>
             <TableCell>

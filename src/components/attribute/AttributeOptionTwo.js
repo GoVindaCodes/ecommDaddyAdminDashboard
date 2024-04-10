@@ -8,13 +8,14 @@ const AttributeOptionTwo = ({
   setValues,
   lang,
   selectedValueClear,
+  setSelectedValueClear,
 }) => {
   const [attributeOptions, setAttributeOptions] = useState([]);
   const [selected, setSelected] = useState([]);
-  // console.log('attributes in attribute option',attributes)
+  console.log('attributes in attribute option', attributes)
 
   const handleSelectValue = (items) => {
-    // setSelectedValueClear(false);
+    setSelectedValueClear(false);
     setSelected(items);
     setValues({
       ...values,
@@ -26,7 +27,7 @@ const AttributeOptionTwo = ({
     const options = attributes?.variants?.map((val) => {
       return {
         ...val,
-        label: showingTranslateValue(val?.name, lang),
+        label: showingTranslateValue(val?.name[lang], lang),
         value: val?._id,
       };
     });

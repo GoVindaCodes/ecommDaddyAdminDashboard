@@ -92,6 +92,12 @@ const AttributeTable = ({ isCheck, setIsCheck, attributes }) => {
         console.log("Fetching currencies...");
         const response = await requests.get('/api/attributes');
         console.log("currencies fetched successfully from  the tables:", response);
+        // // Assuming `response` is the array containing objects with `title` and `name` properties
+        // response.forEach((item, index) => {
+        //   console.log(`Item ${index + 1}:`);
+        //   console.log("Title:", item.title);
+        //   console.log("Name:", item.name);
+        // });
         setAttributes(response);
       } catch (error) {
         console.error('Error fetching languages:', error);
@@ -128,19 +134,34 @@ const AttributeTable = ({ isCheck, setIsCheck, attributes }) => {
               {attribute?._id?.substring(0, 6)}
             </TableCell>
 
-            <TableCell className="font-medium text-sm">
-              {/* {showingTranslateValue(attribute.title, lang)} */}
-              {attribute.title}
-            </TableCell>
+            {/* <TableCell className="font-medium text-sm"> */}
+            {/* {showingTranslateValue(attribute.title.en, lang)} */}
+            {/* added by : Govinda 10/4/2024 */}
+            {/* {attribute.title.en} */}
+            {/* </TableCell> */}
 
+
+            {/* added by : Govinda 10/4/2024 */}
+            {/* {attribute.title.en} */}
             <TableCell className="font-medium text-sm">
-              {/* {showingTranslateValue(attribute.name, lang)} */}
-              {attribute.name}
+              {showingTranslateValue(attribute.name.en, lang)}
             </TableCell>
 
             {/* <TableCell className="font-medium text-sm">
               {attribute.variants}
             </TableCell> */}
+
+            {/* added by : Govinda 10/4/2024 */}
+
+            {/* {attribute.title.en} */}
+
+            {/* and variants map since its an array in the given backend code  */}
+
+            <TableCell className="font-medium text-sm">
+              {attribute.variants.map((variant, index) => (
+                <div key={index}>{variant.name.en} - {variant.status}</div>
+              ))}
+            </TableCell>
 
             <TableCell className="font-medium text-sm">
               {attribute.option}
@@ -171,7 +192,7 @@ const AttributeTable = ({ isCheck, setIsCheck, attributes }) => {
                 setIsCheck={setIsCheck}
                 handleUpdate={handleUpdate}
                 handleModalOpen={handleModalOpen}
-                title={attribute.title}
+                title={attribute.title[lang]}
               // onClick={() => deleteAttribute(attribute._id)} // Call deleteAttribute function with attribute id
               // title={showingTranslateValue(attribute.title, lang)}
               />

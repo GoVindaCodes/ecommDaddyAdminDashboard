@@ -11,7 +11,7 @@ import {
   TableFooter,
   TableHeader,
 } from "@windmill/react-ui";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FiPlus } from "react-icons/fi";
 
@@ -28,6 +28,9 @@ import PageTitle from "components/Typography/PageTitle";
 // import { AdminContext } from "context/AdminContext";
 import { SidebarContext } from "context/SidebarContext";
 import adminData from "utils/staff";
+import useAsync from "hooks/useAsync";
+import AdminServices from "services/AdminServices";
+import requests from "services/httpService";
 // import AdminServices from "services/AdminServices";
 
 const Staff = () => {
@@ -36,8 +39,9 @@ const Staff = () => {
   const { toggleDrawer, lang } = useContext(SidebarContext);
 
   // const { data, loading } = useAsync(() => AdminServices.getAllStaff({ email: ('adminInfo.email') }));
-  const data = adminData;
-  const loading = false
+  const { data, loading } = useAsync(AdminServices.getAllStaff);
+  // const data = adminData;
+  // const loading = false
 
   const {
     userRef,
@@ -52,6 +56,21 @@ const Staff = () => {
 
 
   const { t } = useTranslation();
+  const [coupons, setCoupons] = useState([]);
+  // console.log("allID : ", allId)
+  useEffect(() => {
+    const fetchLanguages = async () => {
+      try {
+        console.log("Fetching Coupons...");
+        const response = await requests.get('/api/admin');
+        console.log("admin fetched successfully:", response);
+        setCoupons(response);
+      } catch (error) {
+        console.error('Error fetching languages:', error);
+      }
+    };
+    fetchLanguages();
+  }, []);
 
   return (
     <>

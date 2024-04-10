@@ -1,4 +1,4 @@
-import requests from "./httpService";
+// import requests from "./httpService";
 
 
 // Static Data getting
@@ -63,49 +63,103 @@ import requests from "./httpService";
 // Dynamic Data getting
 
 
+// const AdminServices = {
+//   registerAdmin: async (body) => {
+//     return requests.post("/admin/register", body);
+//   },
+
+//   loginAdmin: async (body) => {
+//     console.log("hi", body)
+//     return requests.post(`/login`, body);
+//   },
+
+//   forgetPassword: async (body) => {
+//     return requests.put("/admin/forget-password", body);
+//   },
+
+//   resetPassword: async (body) => {
+//     return requests.put("/admin/reset-password", body);
+//   },
+
+//   signUpWithProvider: async (body) => {
+//     return requests.post("/admin/signup", body);
+//   },
+
+//   addStaff: async (body) => {
+//     return requests.post("/admin/add", body);
+//   },
+//   getAllStaff: async (body) => {
+//     // return requests.get("/admin", body);
+//     return { staff: [{ email: 'admin@test.com' }] }
+//   },
+//   getStaffById: async (id, body) => {
+//     return requests.post(`/admin/${id}`, body);
+//   },
+
+//   updateStaff: async (id, body) => {
+//     return requests.put(`/admin/${id}`, body);
+//   },
+
+//   updateStaffStatus: async (id, body) => {
+//     return requests.put(`/admin/update-status/${id}`, body);
+//   },
+
+//   deleteStaff: async (id) => {
+//     return requests.delete(`/admin/${id}`);
+//   },
+// };
+
+// export default AdminServices;
+
+
+
+// new backend matching routes for now 
+
+
+
+// services/AdminServices.js
+
+import requests from "./httpService";
+
 const AdminServices = {
   registerAdmin: async (body) => {
-    return requests.post("/admin/register", body);
+    return requests.post("/api/admin/register", body);
   },
 
   loginAdmin: async (body) => {
-    console.log("hi", body)
-    return requests.post(`/login`, body);
+    return requests.post("/api/admin/login", body);
   },
 
   forgetPassword: async (body) => {
-    return requests.put("/admin/forget-password", body);
+    return requests.put("/api/admin/forget-password", body);
   },
 
   resetPassword: async (body) => {
-    return requests.put("/admin/reset-password", body);
-  },
-
-  signUpWithProvider: async (body) => {
-    return requests.post("/admin/signup", body);
+    return requests.put("/api/admin/reset-password", body);
   },
 
   addStaff: async (body) => {
-    return requests.post("/admin/add", body);
+    return requests.post("/api/admin/add", body);
   },
-  getAllStaff: async (body) => {
-    // return requests.get("/admin", body);
-    return { staff: [{ email: 'admin@test.com' }] }
+
+  getAllStaff: async () => {
+    return requests.get("/api/admin/");
   },
-  getStaffById: async (id, body) => {
-    return requests.post(`/admin/${id}`, body);
+
+  getStaffById: async (id) => {
+    return requests.get(`/api/admin/${id}`);
   },
 
   updateStaff: async (id, body) => {
-    return requests.put(`/admin/${id}`, body);
+    return requests.put(`/api/admin/update/${id}`, body);
   },
 
   updateStaffStatus: async (id, body) => {
-    return requests.put(`/admin/update-status/${id}`, body);
+    return requests.put(`/api/admin/update-status/${id}`, body);
   },
 
   deleteStaff: async (id) => {
-    return requests.delete(`/admin/${id}`);
+    return requests.delete(`/api/admin/delete/${id}`);
   },
 };
 

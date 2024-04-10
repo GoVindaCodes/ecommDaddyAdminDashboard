@@ -57,7 +57,9 @@ const ChildAttributeTable = ({
             </TableCell>
 
             <TableCell className="font-medium text-sm">
-              {showingTranslateValue(attribute?.name, lang)}
+              {/* added by : Govinda 10/4/2024 */}
+              {/* added [lang] */}
+              {showingTranslateValue(attribute?.name[lang], lang)}
             </TableCell>
 
             <TableCell className="font-medium text-sm">{att?.option}</TableCell>

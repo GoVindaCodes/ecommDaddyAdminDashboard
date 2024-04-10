@@ -27,6 +27,7 @@ import AttributeServices from "services/AttributeServices";
 import requests from "services/httpService";
 import CouponServices from "services/CouponServices";
 import SettingServices from "services/SettingServices";
+import { showingTranslateValue } from "utils/translate";
 // import { showingTranslateValue } from "utils/translate";
 // import { showDateFormat } from "utils/dateFormate";
 
@@ -91,7 +92,7 @@ const CouponTable = ({ lang, isCheck, setIsCheck }) => {
       )}
 
       <TableBody>
-        {coupons?.map((coupon, i) => (
+        {data?.map((coupon, i) => (
           <TableRow key={i + 1}>
             <TableCell>
               <CheckBox
@@ -119,8 +120,8 @@ const CouponTable = ({ lang, isCheck, setIsCheck }) => {
                 )}
                 <div>
                   <span className="text-sm">
-                    {/* {showingTranslateValue(coupon?.title, lang)} */}
-                    {coupon.title}
+                    {showingTranslateValue(coupon?.title[lang], lang)}
+                    {/* {coupon?.title[lang]} */}
                   </span>{" "}
                 </div>
               </div>{" "}
@@ -191,8 +192,8 @@ const CouponTable = ({ lang, isCheck, setIsCheck }) => {
                 isCheck={isCheck}
                 handleUpdate={handleUpdate}
                 handleModalOpen={handleModalOpen}
-                // title={showingTranslateValue(coupon?.title, lang)}
-                title={coupon.title}
+                title={showingTranslateValue(coupon?.title[lang], lang)}
+              // title={coupon.title}
               />
             </TableCell>
           </TableRow>

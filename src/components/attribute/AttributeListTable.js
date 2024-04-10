@@ -68,16 +68,16 @@ const AttributeListTable = ({
                     {variantTitle
                       ?.map((att) => {
                         const attributeData = att?.variants?.filter(
-                          (val) => val?.name !== "All"
+                          (val) => val?.name[lang] !== "All"
                         );
 
                         const attributeName = attributeData?.find(
                           (v) => v._id === variant[att?._id]
-                        )?.name;
+                        )?.name[lang];
                         if (attributeName === undefined) {
                           return attributeName?.en;
                         } else {
-                          return showingTranslateValue(attributeName, lang);
+                          return showingTranslateValue(attributeName.en, lang);
                         }
                       })
                       ?.filter(Boolean)

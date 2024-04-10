@@ -10,6 +10,7 @@ import { FiZoomIn } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import OrderServices from "services/OrderServices";
 import requests from "services/httpService";
+import { showDateTimeFormat } from "utils/dateFormate";
 // import { showDateTimeFormat } from "utils/dateFormate";
 
 const OrderTable = ({ orders, currency, globalSetting }) => {
@@ -42,26 +43,26 @@ const OrderTable = ({ orders, currency, globalSetting }) => {
           <TableRow key={i + 1}>
             <TableCell>
               <span className="font-semibold uppercase text-xs">
-                {/* {order?.invoice} */}
-                {order?._id.slice(0, 5)}
+                {order?.invoice}
+                {/* {order?._id.slice(0, 5)} */}
               </span>
             </TableCell>
 
             <TableCell>
               <span className="text-sm">
-                {/* {showDateTimeFormat(
+                {showDateTimeFormat(
                   order?.updatedDate,
                   globalSetting?.default_date_format,
                   "h:mm A"
-                )} */}
-                {order?.updatedDate}
+                )}
+                {/* {order?.updatedDate} */}
 
               </span>
             </TableCell>
 
             <TableCell className="text-xs">
-              {/* <span className="text-sm">{order?.user_info?.name}</span>{" "} */}
-              <span className="text-sm">{order?.name}</span>{" "}
+              <span className="text-sm">{order?.user_info?.name}</span>{" "}
+              {/* <span className="text-sm">{order?.name}</span>{" "} */}
             </TableCell>
 
             <TableCell>

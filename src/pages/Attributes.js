@@ -115,6 +115,7 @@ const Attributes = () => {
     handleSubmitAttribute,
     handleUploadMultiple,
     handleRemoveSelectFile,
+    handleDelete,
   } = useFilter(data);
 
   // react hooks
@@ -123,10 +124,11 @@ const Attributes = () => {
 
   const handleSelectAll = () => {
     setIsCheckAll(!isCheckAll);
-    setIsCheck(data.map((value) => value._id));
+    setIsCheck(data?.map((value) => value._id));
     if (isCheckAll) {
       setIsCheck([]);
     }
+    // console.log("isCheck after setting:", isCheck);
   };
 
   const [attributes, setAttributes] = useState([]);
@@ -145,10 +147,11 @@ const Attributes = () => {
     };
     fetchLanguages();
   }, []);
+  // console.log("datas : ", data)
   return (
     <>
       <PageTitle>{t("AttributeTitle")}</PageTitle>
-      <DeleteModal ids={allId} setIsCheck={setIsCheck} title="Selected Attributes" />
+      <DeleteModal ids={allId} handleDeleteMany={handleDeleteMany} setIsCheck={setIsCheck} title="Selected Attributes" />
       <BulkActionDrawer ids={allId} title="Attributes" />
       <MainDrawer>
         <AttributeDrawer />
@@ -258,7 +261,7 @@ const Attributes = () => {
                         name="selectAll"
                         id="selectAll"
                         handleClick={handleSelectAll}
-                        //onClick={handleSelectAll}
+                        // onClick={handleSelectAll}
                         isChecked={isCheckAll} />
                       {/* </div> */}
                     </TableCell>
@@ -268,7 +271,7 @@ const Attributes = () => {
                     <TableCell> {t("ADisplayName")}</TableCell>
                     <TableCell>{t("AOption")}</TableCell>
 
-                    {/* <TableCell className="text-center">{t("catPublishedTbl")}</TableCell> */}
+                    <TableCell className="text-center">{t("catPublishedTbl")}</TableCell>
 
                     <TableCell className="text-center">{t("Avalues")}</TableCell>
 
@@ -280,7 +283,7 @@ const Attributes = () => {
                   lang={lang}
                   isCheck={isCheck}
                   setIsCheck={setIsCheck}
-                  attributes={attributes}
+                  attributes={data}
                 />
               </Table>
               <TableFooter>

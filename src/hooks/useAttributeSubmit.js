@@ -51,14 +51,14 @@ const useAttributeSubmit = (id) => {
         }
       }
       const attributeData = {
-        // title: {
-        //   [language]: title,
-        // },
-        // name: {
-        //   [language]: name,
-        // },
-        title: title,
-        name: name,
+        title: {
+          [language]: title,
+        },
+        name: {
+          [language]: name,
+        },
+        // title: title,
+        // name: name,
         variants: variantArrayOfObject,
         option: option,
         type: 'attribute',

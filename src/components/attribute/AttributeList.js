@@ -2,6 +2,7 @@ import { Avatar, TableBody, TableCell, TableRow } from "@windmill/react-ui";
 import { showingTranslateValue } from "utils/translate";
 
 const AttributeList = ({ variants, variantTitle, lang, currency }) => {
+  console.log("varriants", variants)
   return (
     <>
       <TableBody>
@@ -33,16 +34,16 @@ const AttributeList = ({ variants, variantTitle, lang, currency }) => {
                   {variantTitle
                     ?.map((att) => {
                       const attributeData = att?.variants?.filter(
-                        (val) => val?.name !== "All"
+                        (val) => val?.name.en !== "All"
                       );
 
                       const attributeName = attributeData?.find(
                         (v) => v._id === variant[att?._id]
-                      )?.name;
+                      )?.name.en;
                       if (attributeName === undefined) {
                         return attributeName?.en;
                       } else {
-                        return showingTranslateValue(attributeName, lang);
+                        return showingTranslateValue(attributeName.en, lang);
                       }
                     })
                     ?.filter(Boolean)

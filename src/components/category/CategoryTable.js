@@ -87,7 +87,9 @@ const CategoryTable = ({
                 <Avatar
                   className="hidden mr-3 md:block bg-gray-50 p-1"
                   src={category?.image}
-                  alt={category?.name}
+                  // {/* added by : Govinda 10/4/2024 */}
+                  // {/* added [lang] */}
+                  alt={category?.name[lang]}
                 />
               ) : (
                 <Avatar
@@ -103,7 +105,9 @@ const CategoryTable = ({
                   to={`/categories/${category?._id}`}
                   className="text-blue-700"
                 >
-                  {category.name}
+                  {/* added by : Govinda 10/4/2024 */}
+                  {/* added [lang] */}
+                  {category.name[lang]}
                   <>
                     {showChild && (
                       <>
@@ -133,7 +137,9 @@ const CategoryTable = ({
                 </Link>
               ) : (
                 <span>
-                  {category.name}
+                  {/* added by : Govinda 10/4/2024 */}
+                  {/* added [lang] */}
+                  {category.name[lang]}
                 </span>
               )}
             </TableCell>

@@ -67,9 +67,9 @@ const Orders = () => {
   // );
   // const data = { orders: orderData };
   const { data, loading } = useAsync(OrderServices.getAllOrders);
-
+  console.log("datas :", data)
   const { dataTable, serviceData, globalSetting } = useFilter(data?.orders);
-
+  console.log("datas.orders :", data?.orders);
   const handleDownloadOrders = async () => {
     try {
       setLoadingExport(true);
@@ -113,21 +113,23 @@ const Orders = () => {
     }
   };
   console.log("data in orders page", data);
-  const [coupons, setCoupons] = useState([]);
-  // console.log("allID : ", allId)
-  useEffect(() => {
-    const fetchLanguages = async () => {
-      try {
-        console.log("Fetching Coupons...");
-        const response = await requests.get('/api/orders');
-        console.log("Coupons fetched successfully:", response);
-        setCoupons(response);
-      } catch (error) {
-        console.error('Error fetching languages:', error);
-      }
-    };
-    fetchLanguages();
-  }, []);
+  console.log("data in data.orders page", data?.orders);
+  console.log("data in data table page", dataTable);
+  // const [coupons, setCoupons] = useState([]);
+  // // console.log("allID : ", allId)
+  // useEffect(() => {
+  //   const fetchLanguages = async () => {
+  //     try {
+  //       console.log("Fetching Coupons...");
+  //       const response = await requests.get('/api/orders');
+  //       console.log("Coupons fetched successfully:", response);
+  //       setCoupons(response);
+  //     } catch (error) {
+  //       console.error('Error fetching languages:', error);
+  //     }
+  //   };
+  //   fetchLanguages();
+  // }, []);
 
   return (
     <>
@@ -268,18 +270,19 @@ const Orders = () => {
                 </Table>
 
                 <TableFooter>
-                  <Pagination
+                  {/* <Pagination
                     totalResults={data?.orders.length}
                     resultsPerPage={2}
                     onChange={handleChangePage}
                     label="Table navigation"
-                  />
-                  {/* <Pagination
+                  /> */}
+                  {/* this works  */}
+                  <Pagination
                     totalResults={data?.totalDoc}
-                    resultsPerPage={resultsPerPage}
+                    resultsPerPage={handleChangePage}
                     onChange={handleChangePage}
                     label="Table navigation"
-                  /> */}
+                  />
                 </TableFooter>
               </TableContainer>
             ) : (

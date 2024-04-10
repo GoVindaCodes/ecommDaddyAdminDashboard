@@ -37,21 +37,21 @@ const useCouponSubmit = (id) => {
     try {
       setIsSubmitting(true);
       const couponData = {
-        title: data.title,
+        // title: data.title,
         // just commeneted for now uncomment when its about to be imlemented
-        // title: {
-        //   [language]: data.title,
-        // },
+        title: {
+          [language]: data.title,
+        },
         couponCode: data.couponCode,
         endTime: data.endTime,
         minimumAmount: data.minimumAmount,
         logo: imageUrl,
         lang: language,
         status: published ? 'show' : 'hide',
-        // discountType: {
-        //   type: discountType ? 'percentage' : 'fixed',
-        //   value: data.discountPercentage,
-        // },
+        discountType: {
+          type: discountType ? 'percentage' : 'fixed',
+          value: data.discountPercentage,
+        },
         discountPercentage: data.discountPercentage,
         productType: data.productType
       };
